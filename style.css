@@ -1,0 +1,13 @@
+body, .jumbotron {
+    background-color: #3333cc;
+}
+
+img {
+    width: 80%;
+    height: 16rem;
+}
+
+.form-control {
+    width: 20%;
+    margin: auto;
+}
