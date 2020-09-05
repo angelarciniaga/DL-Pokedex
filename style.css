@@ -1,11 +1,14 @@
 body, .jumbotron  {
-    background-color: #3333cc;
+    background-color: #000000;
+    background-image: url(http://bc-gb.com/wp-content/uploads/2013/10/gaming-wallpapers-games-323.jpg);
+    background-repeat: no-repeat;
+
     padding-bottom: 0;
 }
 
 img {
     width: 80%;
-    height: 15rem;
+    height: 10rem;
 }
 
 .form-control {
@@ -23,4 +26,19 @@ img {
 
 #chartContainer {
     margin-bottom: 50px;
+}
+
+.alert-danger, .alert-warning {
+    display: none;
+    position: relative;
+}
+
+.card {
+    background-image: url(https://images4.alphacoders.com/661/661563.jpg);
+    background-size: cover;
+    background-position: right;
+    border: 1px solid #282828;
+}
+
+#chartContainer {
 }

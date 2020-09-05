@@ -7,7 +7,7 @@ $(document).ready(function(){
         let patronLetras = /^[a-z ,.'-]+$/gim;
         console.log(nombrePoke);
         
-        if (nombrePoke && patronLetras.test(nombrePoke)){
+        if (nombrePoke && patronLetras.test(nombrePoke)=== true){
             $.ajax({
                 type: 'get',
                 url: 'https://pokeapi.co/api/v2/pokemon/' + nombrePoke,
@@ -17,13 +17,11 @@ $(document).ready(function(){
                     <div class="card container" style="width: 20rem;">
                         <img src="${response.sprites.front_default}" class="card-img-top" alt="${response.name}">
                             <div class="card-body text-center">
-                                <h3>Nombre: ${response.name}<h3>
-                                <h3 class="card-text">Experiencia: ${response.base_experience}</h3>
+                                <h3 class="text-light">Nombre: ${response.name}<h3>
+                                <h3 class="card-text text-light">Experiencia: ${response.base_experience}</h3>
                             </div>
                         </div>
                     `);
-                    //integro el arreglo al html
-//                    $('#resultado').html(`<h1>${response.item.name}</h1>`);
 
                     let datosXY = [];
                     response.stats.forEach(element => {
@@ -38,7 +36,7 @@ $(document).ready(function(){
 
                     var options = {
                         title: {
-                            text: 'Grafica de columnas con jQuery y CanvasJS'              
+                            text: `Estadísticas de ${response.name}`              
                         },
                         data: [              
                             {
@@ -52,12 +50,14 @@ $(document).ready(function(){
                 
                 },
                 error: function(error) {
+                    $('.alert-danger').toggle();
                     console.error(error);
                 }
             });
                 
         }else {
-            alert('Ingrese un nombre valido');
+            $('.alert-warning').toggle();
+
         }
     
     });
