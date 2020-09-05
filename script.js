@@ -1,75 +1,65 @@
 $(document).ready(function(){
-    $('#respuesta').empty();
     let formulario = $('.formulario'); 
-    let nombrePoke = $('#nombrePoke').val() || 'pikachu';
-    let patronLetras = /^[a-z ,.'-]+$/gim;
-    console.log(nombrePoke);
-    consulta(nombrePoke);
-
+    
     formulario.on('submit', function(event){
         event.preventDefault();
-        $('#resultado').empty();
-        nombrePoke = $('#nombrePoke').val();
+        let nombrePoke = $('#nombrePoke').val();
+        let patronLetras = /^[a-z ,.'-]+$/gim;
         console.log(nombrePoke);
-        consulta(nombrePoke);
-    });
-
-    function consulta(nombrePoke){
+        
         if (nombrePoke && patronLetras.test(nombrePoke)){
             $.ajax({
-                dataType: 'jason',
                 type: 'get',
                 url: 'https://pokeapi.co/api/v2/pokemon/' + nombrePoke,
                 success: function(response){
                     console.log(response);
                     $('#resultado').html(`
-                        <div class='text-center'>
-                            <h3>Nombre: ${response.name}</h3>
-                            <img src='${response.sprites.front_default}' alt='${response.name}'>
+                    <div class="card container" style="width: 20rem;">
+                        <img src="${response.sprites.front_default}" class="card-img-top" alt="${response.name}">
+                            <div class="card-body text-center">
+                                <h3>Nombre: ${response.name}<h3>
+                                <h3 class="card-text">Experiencia: ${response.base_experience}</h3>
+                            </div>
                         </div>
                     `);
-                    let resultado =`
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Potenciado 1</th>
-                                    <th>Potenciador 2</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                    `;
+                    //integro el arreglo al html
+//                    $('#resultado').html(`<h1>${response.item.name}</h1>`);
 
-                    response.held_items.forEach(element =>{
-                        console.log(element.held_items.name);
-                        resultado += `
-                            <tr>
-                                <th>${element[0].name}</th>
-                                <th>${element[1].name}</th>
-                            </tr>
-                        `;
+                    let datosXY = [];
+                    response.stats.forEach(element => {
+                        console.log(element.base_stat);//y
+                        console.log(element.stat.name);//label
+                        datosXY.push(
+                            {
+                                label: element.stat.name, 
+                                y:element.base_stat
+                            });
                     });
-                    resultado += `
-                        </tbody>
-                        </table>
-                    `;
-                    $('#resultado').append(resultado);
+
+                    var options = {
+                        title: {
+                            text: 'Grafica de columnas con jQuery y CanvasJS'              
+                        },
+                        data: [              
+                            {
+                                type: "column",
+                                dataPoints: datosXY
+                            }
+                        ]
+                    };
+                
+                    $('#chartContainer').CanvasJSChart(options);
+                
                 },
                 error: function(error) {
                     console.error(error);
                 }
             });
-            
+                
         }else {
             alert('Ingrese un nombre valido');
         }
+    
+    });
 
-    }
-})
-
-
-
-
-
-
-
-
+});
