@@ -1,4 +1,4 @@
-body, .jumbotron  {
+body {
     background-color: #000000;
     background-image: url(http://bc-gb.com/wp-content/uploads/2013/10/gaming-wallpapers-games-323.jpg);
     background-repeat: no-repeat;
@@ -6,6 +6,9 @@ body, .jumbotron  {
     padding-bottom: 0;
 }
 
+.jumbotron {
+    background-color: transparent;
+}
 img {
     width: 80%;
     height: 10rem;
@@ -38,7 +41,4 @@ img {
     background-size: cover;
     background-position: right;
     border: 1px solid #282828;
-}
-
-#chartContainer {
 }

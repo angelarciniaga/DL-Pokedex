@@ -52,12 +52,17 @@ $(document).ready(function(){
                 error: function(error) {
                     $('.alert-danger').toggle();
                     console.error(error);
+                    $('#btnDanger').click(function(){
+                        location.reload();
+                    })
                 }
             });
                 
         }else {
             $('.alert-warning').toggle();
-
+            $('#btnWarning').click(function(){
+                location.reload();
+            })
         }
     
     });
